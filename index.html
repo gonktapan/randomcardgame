@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>เลือกการ์ดลุ้นรางวัล</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      padding: 30px 15px;
+      background-color: #f2f2f2;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+
+    .card-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .card {
+      width: 120px;
+      height: 170px;
+      background-color: #444;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .revealed {
+      background-color: gold;
+      color: #222;
+      font-weight: bold;
+      cursor: default;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      background-color: #444;
+      color: white;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #222;
+    }
+
+    /* ✅ Responsive */
+    @media (max-width: 600px) {
+      .card {
+        width: 40vw;
+        height: 28vh;
+        font-size: 1.2rem;
+      }
+
+      h1 {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>เลือกการ์ดเพื่อรับรางวัล!</h1>
+  <div class="card-container" id="cardContainer"></div>
+  <button onclick="resetGame()">รีเซ็ต (ล้างข้อมูล)</button>
+
+  <script>
+    const prizes = ['ทองคำ 100 ชิ้น', 'ตั๋วพิเศษ', 'XP 500', 'ไอเทมลับ'];
+    let selectedIndex = null;
+    let cards = [];
+
+    function shuffle(array) {
+      return array.sort(() => Math.random() - 0.5);
+    }
+
+    function createCards() {
+      const stored = localStorage.getItem('selectedCard');
+      const storedPrizes = localStorage.getItem('prizes');
+      const container = document.getElementById('cardContainer');
+      container.innerHTML = '';
+      cards = [];
+
+      const usedPrizes = storedPrizes ? JSON.parse(storedPrizes) : shuffle([...prizes]);
+
+      for (let i = 0; i < 4; i++) {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.textContent = '🃏';
+        card.dataset.index = i;
+
+        if (stored && parseInt(stored) === i) {
+          card.classList.add('revealed');
+          card.textContent = usedPrizes[i];
+        }
+
+        card.addEventListener('click', function () {
+          if (localStorage.getItem('selectedCard') !== null) return;
+
+          selectedIndex = i;
+          card.classList.add('revealed');
+          card.textContent = usedPrizes[i];
+
+          // Save selected card and prizes to localStorage
+          localStorage.setItem('selectedCard', i);
+          localStorage.setItem('prizes', JSON.stringify(usedPrizes));
+        });
+
+        container.appendChild(card);
+        cards.push(card);
+      }
+    }
+
+    function resetGame() {
+      localStorage.removeItem('selectedCard');
+      localStorage.removeItem('prizes');
+      createCards();
+    }
+
+    window.onload = createCards;
+  </script>
+</body>
+</html>
