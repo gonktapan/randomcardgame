@@ -3,141 +3,176 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>เลือกการ์ดลุ้นรางวัล</title>
+  <title>PICK YOUR SUMMER PERK!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Arial', sans-serif;
+      background-image: url('https://i.postimg.cc/k2cd9b3V/your-image.jpg');
+      background-size: cover;
+      background-position: center;
+      color: black;
+      font-family: 'Noto Sans Thai', sans-serif;
       text-align: center;
-      padding: 30px 15px;
-      background-color: #f2f2f2;
+      padding: 50px;
     }
-
     h1 {
-      margin-bottom: 20px;
-      font-size: 1.8rem;
+      color: black;
+      margin-bottom: 50px;
     }
-
     .card-container {
       display: flex;
       justify-content: center;
+      gap: 20px;
+      margin-top: 50px;
       flex-wrap: wrap;
-      gap: 15px;
+    }
+    .card {
+      width: 150px;
+      height: 220px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+    .card-inner {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      position: relative;
+    }
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
     }
 
-    .card {
-      width: 120px;
-      height: 170px;
-      background-color: #444;
-      color: white;
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .card-front img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+      background-color: #f7e1a6;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 12px;
-      font-size: 1.5rem;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease;
-    }
-
-    .card:hover {
-      transform: scale(1.05);
-    }
-
-    .revealed {
-      background-color: gold;
-      color: #222;
+      font-size: 20px;
+      color: black;
       font-weight: bold;
-      cursor: default;
     }
 
-    button {
-      margin-top: 30px;
-      padding: 10px 20px;
-      font-size: 1rem;
-      cursor: pointer;
-      border: none;
-      background-color: #444;
-      color: white;
-      border-radius: 8px;
-      transition: background-color 0.3s ease;
+    .reward {
+      margin-top: 10px;
+      font-size: 18px;
+      color: black;
+      font-weight: bold;
     }
 
-    button:hover {
-      background-color: #222;
+    .card-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    /* ✅ Responsive */
-    @media (max-width: 600px) {
-      .card {
-        width: 40vw;
-        height: 28vh;
-        font-size: 1.2rem;
-      }
-
-      h1 {
-        font-size: 1.4rem;
-      }
+    .card.flipped {
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
-  <h1>เลือกการ์ดเพื่อรับรางวัล!</h1>
-  <div class="card-container" id="cardContainer"></div>
-  <button onclick="resetGame()">รีเซ็ต (ล้างข้อมูล)</button>
+
+  <h1>PICK YOUR SUMMER PERK!</h1>
+
+  <div class="card-container">
+    <div class="card-wrapper">
+      <div class="card" onclick="revealReward(this)">
+        <div class="card-inner">
+          <div class="card-front">
+            <img src="https://i.postimg.cc/Mc1Yk6JG/Chat-GPT-Image-Apr-18-2025-at-03-45-39-PM-0.png" alt="ไพ่">
+          </div>
+          <div class="card-back">
+            🎁 ได้รับส่วนลด 10%
+          </div>
+        </div>
+      </div>
+      <div class="reward"></div>
+    </div>
+
+    <div class="card-wrapper">
+      <div class="card" onclick="revealReward(this)">
+        <div class="card-inner">
+          <div class="card-front">
+            <img src="https://i.postimg.cc/HcH9dqT9/Chat-GPT-Image-Apr-18-2025-at-04-16-49-PM-0.png" alt="ไพ่">
+          </div>
+          <div class="card-back">
+            💖 ได้รับส่วนลด 12%
+          </div>
+        </div>
+      </div>
+      <div class="reward"></div>
+    </div>
+
+    <div class="card-wrapper">
+      <div class="card" onclick="revealReward(this)">
+        <div class="card-inner">
+          <div class="card-front">
+            <img src="https://i.postimg.cc/7GVM6K68/Chat-GPT-Image-Apr-18-2025-at-04-37-05-PM-0.png" alt="ไพ่">
+          </div>
+          <div class="card-back">
+            ⭐ ได้รับส่วนลด 15%
+          </div>
+        </div>
+      </div>
+      <div class="reward"></div>
+    </div>
+
+    <div class="card-wrapper">
+      <div class="card" onclick="revealReward(this)">
+        <div class="card-inner">
+          <div class="card-front">
+            <img src="https://i.postimg.cc/tYgD1GWr/Chat-GPT-Image-Apr-18-2025-at-04-48-55-PM-0.png" alt="ไพ่">
+          </div>
+          <div class="card-back">
+            💎 รับสิทธิ์ซื้อน้ำหอม 2 ขวดคู่กันราคาพิเศษ
+          </div>
+        </div>
+      </div>
+      <div class="reward"></div>
+    </div>
+  </div>
 
   <script>
-    const prizes = ['ทองคำ 100 ชิ้น', 'ตั๋วพิเศษ', 'XP 500', 'ไอเทมลับ'];
-    let selectedIndex = null;
-    let cards = [];
+    const rewards = [
+      "🎁 ได้รับส่วนลด 10%",
+      "💖 ได้รับส่วนลด 12%",
+      "⭐ ได้รับส่วนลด 15%",
+      "💎 รับสิทธิ์ซื้อน้ำหอม 2 ขวดคู่กันราคาพิเศษ"
+    ];
 
-    function shuffle(array) {
-      return array.sort(() => Math.random() - 0.5);
+    let flippedCard = null;
+
+    function revealReward(card) {
+      if (flippedCard || card.classList.contains("flipped")) return;
+
+      card.classList.add("flipped");
+
+      // Show the reward on the back of the card
+      const rewardText = card.querySelector('.card-back').textContent;
+      const wrapper = card.parentElement;
+      const rewardDiv = wrapper.querySelector(".reward");
+      rewardDiv.textContent = rewardText;
+
+      flippedCard = card;
     }
-
-    function createCards() {
-      const stored = localStorage.getItem('selectedCard');
-      const storedPrizes = localStorage.getItem('prizes');
-      const container = document.getElementById('cardContainer');
-      container.innerHTML = '';
-      cards = [];
-
-      const usedPrizes = storedPrizes ? JSON.parse(storedPrizes) : shuffle([...prizes]);
-
-      for (let i = 0; i < 4; i++) {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.textContent = '🃏';
-        card.dataset.index = i;
-
-        if (stored && parseInt(stored) === i) {
-          card.classList.add('revealed');
-          card.textContent = usedPrizes[i];
-        }
-
-        card.addEventListener('click', function () {
-          if (localStorage.getItem('selectedCard') !== null) return;
-
-          selectedIndex = i;
-          card.classList.add('revealed');
-          card.textContent = usedPrizes[i];
-
-          // Save selected card and prizes to localStorage
-          localStorage.setItem('selectedCard', i);
-          localStorage.setItem('prizes', JSON.stringify(usedPrizes));
-        });
-
-        container.appendChild(card);
-        cards.push(card);
-      }
-    }
-
-    function resetGame() {
-      localStorage.removeItem('selectedCard');
-      localStorage.removeItem('prizes');
-      createCards();
-    }
-
-    window.onload = createCards;
   </script>
+
 </body>
 </html>
